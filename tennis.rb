@@ -1,6 +1,12 @@
+#-------------Tennis Module---------------#
+# Tennis Module groups together classes, methods, and constants.
+
 module Tennis
+
+#------------Game Class-------------------#
+
   class Game
-    attr_accessor :player1, :player2
+    attr_accessor :player1, :player2, :wins, :opponent
     def initialize
       # Create two players.
       @player1 = Player.new
@@ -9,16 +15,17 @@ module Tennis
       @player1.opponent = @player2
       @player2.opponent = @player1
     end
-
+      # Increments the points of the winning player.
     def wins_ball(wins)
-      # Increment the points of the winning player.
       if wins == 1
         player1.points += 1
       else
         player2.points += 1
+      end
     end
   end
-end
+
+#-------------Player Class---------------#
 
   class Player
     attr_accessor :points, :opponent
@@ -27,22 +34,23 @@ end
       @points = 0
     end
 
-    # Increments the score by 1.
+    # Increments the points by 1.
     #
     # Returns the integer new score.
     def record_won_ball!
       @points += 1
     end
 
-    # Returns the String score for the player.
+    # Each player can have either of these points in one game 0 15 30 40
+ 
     def score
       return 'love' if @points == 0
+      return 'fifteen' if @points == 1
+      return 'thirty' if @points == 2
+      return 'forty' if @points == 3
+      return 'advantage' if player.points > opponent.points
+      return 'duece' if player1.points == player2.points
+      # return 'win' if player.points --- still trying to figure out how i am going to code this. 
     end
-  end
-end
-
-# When you run the spec in that repo, 
-# You'll notice that some of the code has already been written for us. 
-# A couple of tests are pending, and a few fail. Use the tests as a guide for completing the rest of the kata. 
-# Not all of the tests have been provided for you - you'll have to add a few of your own in order to properly
-# Return scores of "advantage", "duece", or "win".
+  end #--- Ends Player Class
+end #--- Ends Tennis Module
