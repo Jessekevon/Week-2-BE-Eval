@@ -10,20 +10,18 @@ module Tennis
       @player2.opponent = @player1
     end
 
-    def wins_ball(wins)
-      # Increment the points of the winning player.
-      if wins == 1
-        player1.points += 1
-      else
-        player2.points += 1
+    def wins_ball
+      @wins += 1
     end
   end
-end
+
+#------------Player Class--------------#
 
   class Player
     attr_accessor :points, :opponent
 
     def initialize
+      # Set points to 0
       @points = 0
     end
 
@@ -37,12 +35,14 @@ end
     # Returns the String score for the player.
     def score
       return 'love' if @points == 0
+    elsif @points == 2
+      return 30
+
+    else @points == 3
+      return 40
     end
   end
-end
 
-# When you run the spec in that repo, 
-# You'll notice that some of the code has already been written for us. 
-# A couple of tests are pending, and a few fail. Use the tests as a guide for completing the rest of the kata. 
-# Not all of the tests have been provided for you - you'll have to add a few of your own in order to properly
-# Return scores of "advantage", "duece", or "win".
+
+  end
+end
