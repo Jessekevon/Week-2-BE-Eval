@@ -11,7 +11,7 @@ describe Tennis::Game do
       expect(game.player1).to be_a(Tennis::Player)
       expect(game.player2).to be_a(Tennis::Player)
     end
-
+  
     it 'sets the opponent for each player' do
       expect(game.player1.opponent).to eq(game.player2)
       expect(game.player2.opponent).to eq(game.player1)
@@ -25,12 +25,8 @@ describe Tennis::Game do
       expect(game.player1.points).to eq(1)
     end
   end
-  describe '#deuce' do 
-    context 'if player1 and player2 both have 40 points.' do
-      it 'the winner of a ball will have advantage and game ball.' do 
-      end
-    end
-  end
+end
+
 
 #--------------Player Class----------#
 
@@ -59,10 +55,9 @@ describe Tennis::Player do
   describe '#score' do
     context 'when points is 0' do
       it 'returns love' do
-        expect(player.score).to eq('love')
+        expect(player.score).to eq('love') 
       end
     end
-  end
     
     context 'when points is 1' do
       it 'returns fifteen' do
@@ -73,11 +68,39 @@ describe Tennis::Player do
     end
     
     context 'when points is 2' do
-      it 'returns thirty'  
+      it 'returns thirty' do
+        player.points = 2  
+
+        expect(player.score).to eq('thirty')
+      end
     end
     
     context 'when points is 3' do
-      it 'returns forty' 
+      it 'returns forty' do
+        player.points = 3
+
+        expect(player.score).to eq('forty')
+    end
+  end
+    context 'when player points are greater than opponents points' do
+      it 'returns advantage' do
+
+        expect(player.score).to eq('advantage')
+      end
+    end
+
+    context 'when player1 points are equal to player2 points' do
+      it 'returns duece' do
+
+        expect(player.score).to eq('duece')
+      end
+    end
+
+    context 'when player points are two points greater than opponent' do
+      it 'returns win' do
+
+        expect(player.score).to eq('win')
+      end
     end
   end
 end
