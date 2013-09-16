@@ -82,22 +82,29 @@ describe Tennis::Player do
         expect(player.score).to eq('forty')
     end
   end
-    context 'when player points are greater than opponents points' do
+
+    context 'when player points are equal to opponents points' do
+    it 'returns deuce' do
+      player.points = 3
+      player.opponent.points = 3
+
+      expect(player.score).to eq('deuce')
+    end
+  end
+
+    context 'when player has one more point than opponents points' do
       it 'returns advantage' do
+        player.points = 4
+        player.opponent.points = 3
 
         expect(player.score).to eq('advantage')
       end
     end
 
-    context 'when player1 points are equal to player2 points' do
-      it 'returns duece' do
-
-        expect(player.score).to eq('duece')
-      end
-    end
-
-    context 'when player points are two points greater than opponent' do
+    context 'when player has two points greater than opponent' do
       it 'returns win' do
+        player.points = 5
+        player.opponent.points = 3
 
         expect(player.score).to eq('win')
       end
